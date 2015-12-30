@@ -1,3 +1,4 @@
+# -*- coding : utf8 -*-
 '''
 Created on Dec 29, 2015
 
@@ -6,6 +7,7 @@ Created on Dec 29, 2015
 
 import urllib2
 from time import time
+from proxy_fetcher import ProxyFetcher
 
 class ProxyChecker(object):
     '''
@@ -20,10 +22,12 @@ class ProxyChecker(object):
     test_url = 'http://www.baidu.com'
     max_wait_time = 3
 
-    def __init__(self):
+    def __init__(self, proxies):
         '''
         Constructor
         '''
+        if proxies:
+            self.unchecked_proxies = proxies
         pass
     
     def check_proxies(self):
@@ -56,5 +60,7 @@ class ProxyChecker(object):
     
     
 if __name__ == '__main__':
-    pc = ProxyChecker()
+    pf = ProxyFetcher()
+    pf.fetch_xici()
+    pc = ProxyChecker(pf.proxies)
     pc.check_proxies()    
